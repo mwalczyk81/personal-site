@@ -23,7 +23,8 @@ export default function Projects() {
                 <h3 className="text-base font-medium text-gray-900 dark:text-slate-100 leading-snug">
                   {project.title}
                 </h3>
-                {project.url && (
+                {/* Only open-source projects get an external link icon */}
+                {project.type === 'open-source' && project.url && (
                   <a
                     href={project.url}
                     target="_blank"
@@ -40,18 +41,27 @@ export default function Projects() {
                 {project.description}
               </p>
 
-              {project.tags.length > 0 && (
-                <ul className="flex flex-wrap gap-2" role="list">
-                  {project.tags.map((tag) => (
-                    <li
-                      key={tag}
-                      className="text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded px-2 py-0.5"
-                    >
-                      {tag}
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className="flex items-end justify-between gap-3">
+                {project.tags.length > 0 && (
+                  <ul className="flex flex-wrap gap-2" role="list">
+                    {project.tags.map((tag) => (
+                      <li
+                        key={tag}
+                        className="text-xs text-gray-500 dark:text-slate-400 bg-gray-50 dark:bg-slate-800 border border-gray-100 dark:border-slate-700 rounded px-2 py-0.5"
+                      >
+                        {tag}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+
+                {/* Professional badge — signals no public link is available */}
+                {project.type === 'professional' && (
+                  <span className="shrink-0 text-xs text-gray-400 dark:text-slate-500 border border-gray-200 dark:border-slate-700 rounded px-2 py-0.5 whitespace-nowrap">
+                    Professional
+                  </span>
+                )}
+              </div>
             </div>
           ))}
         </div>

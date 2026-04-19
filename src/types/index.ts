@@ -35,6 +35,7 @@ export interface Project {
   url?: string;
   tags: string[];
   featured?: boolean;
+  type: 'open-source' | 'professional';
 }
 
 // Contact form

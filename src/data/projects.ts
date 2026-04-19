@@ -2,39 +2,46 @@ import type { Project } from '../types'
 
 const projects: Project[] = [
   {
-    id: 'pr-review-optimizer',
-    title: 'PR Review Optimizer',
+    id: 'digital-banking-accounts',
+    title: 'Digital Banking Platform — Accounts Service',
+    type: 'professional',
     description:
-      'Python CLI tool that integrates with Azure DevOps to score pull request complexity using Roslyn AST analysis. Helps teams prioritize review effort and surface high-risk changes before they merge.',
-    tags: ['Python', 'Azure DevOps', 'CLI'],
+      "Led delivery of the accounts service layer within a cloud-native rewrite of Fiserv's digital banking platform. Architected and maintained C#/.NET microservices on Azure, and drove a full AutoMapper-to-Mapperly migration to resolve a high-severity CVE — validated by 595 unit tests and 176 contract tests with zero regressions. Diagnosed systemic latency traced to Azure Redis Cache disconnection causing Cosmos DB fallback at scale.",
+    tags: ['C#/.NET', 'Azure', 'Microservices', 'Cosmos DB', 'Redis'],
   },
   {
-    id: 'ado-pipeline-manager',
-    title: 'Azure DevOps Pipeline Manager',
+    id: 'ai-developer-tooling',
+    title: 'AI Developer Tooling — Agent Package Manager',
+    type: 'professional',
     description:
-      'Build manager with graceful shutdown handling and Azure Functions as a deployment target. Provides reliable pipeline orchestration with clean teardown on interruption.',
-    tags: ['C#/.NET', 'Azure DevOps', 'Azure Functions'],
+      'Built and distributed an Agent Package Manager (APM) to deliver GitHub Copilot skills and custom Claude agent prompts to 150+ engineers across a large .NET platform. Includes an MCP server for autonomous skill navigation and a team-wide rollout across Mac and Windows.',
+    tags: ['TypeScript', 'MCP', 'GitHub Copilot', 'Azure DevOps', 'AI'],
   },
   {
-    id: 'fitgpt-discord-bot',
-    title: 'FitGPT Discord Bot',
+    id: 'ado-compliance-runner',
+    title: 'Azure DevOps Pipeline Compliance Runner',
+    type: 'professional',
     description:
-      'Discord bot that integrates Fitbit health data with GPT to enable conversational health insights. Ask questions about your activity, sleep, and trends directly in Discord.',
-    tags: ['Python', 'Discord', 'Fitbit API', 'GPT'],
+      "Internal tool that automatically triggered Azure DevOps pipeline builds for any repository that hadn't built successfully in the last 30 days, keeping them compliant with Fiserv security scanning standards. Generated an HTML report summarizing pipeline status across all repositories.",
+    tags: ['C#/.NET', 'Azure DevOps', 'Security Compliance'],
   },
   {
-    id: 'congress-stock-tracker',
-    title: 'Congress Stock Tracker',
+    id: 'mcp-fitbit-obsidian',
+    title: 'MCP Fitbit Obsidian',
+    type: 'open-source',
     description:
-      'Tracks congressional stock trades and surfaces patterns across members, sectors, and timing. Aggregates public disclosure data into a queryable format for trend analysis.',
-    tags: ['C#', 'Python', 'Data'],
+      'Python MCP server that syncs Fitbit health data into Obsidian daily notes. Supports stdio and SSE transports, OAuth 2.0 token management, and exposes tools usable in Claude Desktop and Claude.ai.',
+    tags: ['Python', 'MCP', 'Fitbit API', 'Obsidian'],
+    url: 'https://github.com/mwalczyk81/mcp-fitbit-obsidian',
   },
   {
-    id: 'ai-toolkit',
-    title: 'AI Toolkit',
+    id: 'system-monitor',
+    title: 'System Monitor',
+    type: 'open-source',
     description:
-      'Agent Package Manager (APM) for distributing GitHub Copilot skills and Claude MCP servers to 150+ engineers across a large .NET platform team. Standardizes AI tooling adoption at scale.',
-    tags: ['TypeScript', 'MCP', 'GitHub Copilot', 'AI'],
+      'Real-time system monitoring dashboard built with Blazor. Displays CPU, RAM, disk, and network metrics with live charts in the browser.',
+    tags: ['C#', 'Blazor', '.NET'],
+    url: 'https://github.com/mwalczyk81/system-monitor',
   },
 ]
 
