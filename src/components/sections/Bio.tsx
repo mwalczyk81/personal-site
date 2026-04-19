@@ -31,7 +31,7 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
       target="_blank"
       rel="noopener noreferrer"
       aria-label={link.label}
-      className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 transition-colors duration-150"
+      className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors duration-150"
     >
       {Icon ? <Icon size={18} /> : <ExternalLink size={18} aria-hidden />}
       <span className="capitalize">{link.platform}</span>
@@ -41,30 +41,28 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
 
 export default function Bio() {
   return (
-    <div
-      className="min-h-screen"
-      style={{ background: 'linear-gradient(135deg, white 0%, var(--color-accent-100) 100%)' }}
-    >
+    // hero-gradient class is defined in index.css with a .dark override for dark mode
+    <div className="hero-gradient min-h-screen">
       <section
         id="bio"
         aria-label="About"
         className="min-h-screen flex flex-col justify-center px-6 py-40 max-w-5xl mx-auto"
       >
         {bio.location && (
-          <p className="text-xs font-semibold tracking-widest text-gray-400 uppercase mb-6">
+          <p className="text-xs font-semibold tracking-widest text-gray-400 dark:text-slate-500 uppercase mb-6">
             {bio.location}
           </p>
         )}
 
-        <h1 className="font-display text-5xl sm:text-6xl font-light tracking-tight text-gray-900 mb-4">
+        <h1 className="font-display text-5xl sm:text-6xl font-light tracking-tight text-gray-900 dark:text-slate-100 mb-4">
           {bio.name}
         </h1>
 
-        <p className="text-xl sm:text-2xl text-gray-400 font-light mb-8">
+        <p className="text-xl sm:text-2xl text-gray-400 dark:text-slate-500 font-light mb-8">
           {bio.title}
         </p>
 
-        <p className="text-base text-gray-600 leading-relaxed max-w-2xl mb-10">
+        <p className="text-base text-gray-600 dark:text-slate-400 leading-relaxed max-w-2xl mb-10">
           {bio.summary}
         </p>
 

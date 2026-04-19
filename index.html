@@ -13,6 +13,32 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300..600&display=swap"
     />
+    <!-- SEO -->
+    <meta name="description" content="Software Development Manager and Engineer specializing in .NET, Azure, and platform engineering. Based in Lincoln, Nebraska." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://mattwalczyk.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Matt Walczyk — Software Development Manager &amp; Engineer" />
+    <meta property="og:description" content="Software Development Manager and Engineer specializing in .NET, Azure, and platform engineering. Based in Lincoln, Nebraska." />
+    <meta property="og:url" content="https://mattwalczyk.com" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Matt Walczyk — Software Development Manager &amp; Engineer" />
+    <meta name="twitter:description" content="Software Development Manager and Engineer specializing in .NET, Azure, and platform engineering. Based in Lincoln, Nebraska." />
+
+    <!-- Dark mode FOUC prevention — runs synchronously before React renders -->
+    <script>
+      (function () {
+        var stored = localStorage.getItem('color-scheme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (stored === 'dark' || (!stored && prefersDark)) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

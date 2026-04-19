@@ -18,7 +18,8 @@
       "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && npx sharp-cli --input public/favicon.svg --output public/favicon-32x32.png resize 32 32 2>&1)",
       "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && npx sharp-cli --input public/favicon.svg --output public/apple-touch-icon.png resize 180 180 2>&1)",
       "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && node -e \"\nconst fs = require\\('fs'\\);\nconst data32 = fs.readFileSync\\('public/favicon-32x32.png'\\);\nconst data180 = fs.readFileSync\\('public/apple-touch-icon.png'\\);\n// Verify PNG signature \\(first 8 bytes\\)\nconst sig = Buffer.from\\([137,80,78,71,13,10,26,10]\\);\nconsole.log\\('favicon-32x32.png valid PNG:', data32.slice\\(0,8\\).equals\\(sig\\), '| size:', data32.length, 'bytes'\\);\nconsole.log\\('apple-touch-icon.png valid PNG:', data180.slice\\(0,8\\).equals\\(sig\\), '| size:', data180.length, 'bytes'\\);\n\")",
-      "Bash(pnpm build:*)"
+      "Bash(pnpm build:*)",
+      "Bash(pnpm run:*)"
     ]
   }
 }

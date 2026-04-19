@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Class-based dark mode: applies dark: variants when <html class="dark"> is set */
+@custom-variant dark (&:is(.dark *));
+
 @theme {
   /* Typography */
   --font-display: "Fraunces", serif;
@@ -23,10 +26,25 @@
 
 html {
   scroll-behavior: smooth;
+  background-color: white;
+}
+
+html.dark {
+  background-color: #0f172a;
 }
 
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
   }
+}
+
+/* Hero section gradient — overridden for dark mode via the .dark ancestor class */
+.hero-gradient {
+  background: linear-gradient(135deg, white 0%, var(--color-accent-100) 100%);
+}
+
+.dark .hero-gradient {
+  /* Warm dark: deep navy fading to dark warm-stone */
+  background: linear-gradient(135deg, #0f172a 0%, #1c1917 100%);
 }
