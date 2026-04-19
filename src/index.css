@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+  /* Typography */
+  --font-display: "Fraunces", serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+
+  /* Accent color scale — warm stone (oklch, hue ~60) */
+  --color-accent-50:  oklch(98%  0.02 60);
+  --color-accent-100: oklch(95%  0.04 60);
+  --color-accent-200: oklch(89%  0.06 60);
+  --color-accent-300: oklch(81%  0.08 60);
+  --color-accent-400: oklch(72%  0.09 60);
+  --color-accent-500: oklch(63%  0.10 60);
+  --color-accent-600: oklch(54%  0.10 60);
+  --color-accent-700: oklch(44%  0.09 60);
+  --color-accent-800: oklch(34%  0.07 60);
+  --color-accent-900: oklch(25%  0.05 60);
+
+  /* Motion */
+  --duration-fast: 150ms;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

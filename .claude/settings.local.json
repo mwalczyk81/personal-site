@@ -1,0 +1,24 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pwsh -NoProfile -File \".specify/integrations/claude/scripts/update-context.ps1\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pwsh -NoProfile -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pnpm add -D tailwindcss @tailwindcss/vite 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pnpm build 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pnpm add lucide-react 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && pnpm add -D vitest @testing-library/react @testing-library/user-event @testing-library/jest-dom jsdom 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && node -e \"const l = require\\('./node_modules/lucide-react'\\); const keys = Object.keys\\(l\\).filter\\(k => k.toLowerCase\\(\\).includes\\('git'\\) || k.toLowerCase\\(\\).includes\\('link'\\)\\); console.log\\(keys.join\\('\\\\n'\\)\\)\" 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && powershell -File \".specify/scripts/powershell/setup-plan.ps1\" -Json 2>&1)",
+      "WebSearch",
+      "mcp__claude_ai_Context7__resolve-library-id",
+      "mcp__claude_ai_Context7__query-docs",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && powershell -File \".specify/scripts/powershell/update-agent-context.ps1\" -AgentType claude 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && powershell -File \".specify/scripts/powershell/check-prerequisites.ps1\" -Json 2>&1)",
+      "Bash(magick --version 2>/dev/null && echo \"IMAGEMAGICK_OK\" || echo \"NO_IMAGEMAGICK\"\ninkscape --version 2>/dev/null && echo \"INKSCAPE_OK\" || echo \"NO_INKSCAPE\"\nnode -e \"require\\('sharp'\\); console.log\\('SHARP_OK'\\)\" 2>/dev/null || echo \"NO_SHARP\"\nnode -e \"require\\('canvas'\\); console.log\\('CANVAS_OK'\\)\" 2>/dev/null || echo \"NO_CANVAS\")",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && npx sharp-cli --input public/favicon.svg --output public/favicon-32x32.png resize 32 32 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && npx sharp-cli --input public/favicon.svg --output public/apple-touch-icon.png resize 180 180 2>&1)",
+      "Bash(cd \"C:\\\\Users\\\\mwalc\\\\source\\\\repos\\\\personal-site\" && node -e \"\nconst fs = require\\('fs'\\);\nconst data32 = fs.readFileSync\\('public/favicon-32x32.png'\\);\nconst data180 = fs.readFileSync\\('public/apple-touch-icon.png'\\);\n// Verify PNG signature \\(first 8 bytes\\)\nconst sig = Buffer.from\\([137,80,78,71,13,10,26,10]\\);\nconsole.log\\('favicon-32x32.png valid PNG:', data32.slice\\(0,8\\).equals\\(sig\\), '| size:', data32.length, 'bytes'\\);\nconsole.log\\('apple-touch-icon.png valid PNG:', data180.slice\\(0,8\\).equals\\(sig\\), '| size:', data180.length, 'bytes'\\);\n\")",
+      "Bash(pnpm build:*)"
+    ]
+  }
+}
