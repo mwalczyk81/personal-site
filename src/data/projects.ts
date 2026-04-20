@@ -48,7 +48,7 @@ const projects: Project[] = [
     title: 'System Monitor',
     type: 'open-source',
     description:
-      'Real-time system monitoring dashboard built with Blazor. Displays CPU, RAM, disk, and network metrics with live charts in the browser.',
+      'Cross-platform system performance monitor built with .NET MAUI and Blazor. Tracks CPU, memory, GPU, disk, network, and battery metrics in real time with interactive charts.',
     tags: ['C#', 'Blazor', '.NET'],
     url: 'https://github.com/mwalczyk81/system-monitor',
   },
