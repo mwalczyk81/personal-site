@@ -26,6 +26,15 @@ const projects: Project[] = [
     tags: ['C#/.NET', 'Azure DevOps', 'Security Compliance'],
   },
   {
+    id: 'mogboard-mcp',
+    title: 'mogboard-mcp',
+    type: 'open-source',
+    description:
+      'A Python MCP server that gives AI assistants natural language access to FFXIV market board data via the Universalis API. Supports live price lookups, cross-world price comparison, sale history, market tax rates, and automated flip opportunity detection.',
+    tags: ['Python', 'FastMCP', 'MCP', 'Universalis API', 'asyncio'],
+    url: 'https://github.com/mwalczyk81/mogboard-mcp',
+  },
+  {
     id: 'mcp-fitbit-obsidian',
     title: 'MCP Fitbit Obsidian',
     type: 'open-source',
