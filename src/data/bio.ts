@@ -3,7 +3,7 @@ import type { BioData } from '../types'
 // TODO: Replace placeholder URLs with real profile links before going live.
 const bio: BioData = {
   name: 'Matt Walczyk',
-  title: 'Software Development Manager & Engineer',
+  title: 'Director of Software Development',
   summary:
     'I build and lead software teams that ship products people rely on. ' +
     'With a background spanning full-stack engineering, platform development, and team leadership, ' +

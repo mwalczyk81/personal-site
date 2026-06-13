@@ -10,6 +10,14 @@ const projects: Project[] = [
     tags: ['C#/.NET', 'Azure', 'Microservices', 'Cosmos DB', 'Redis'],
   },
   {
+    id: 'fortify-ai-analyzer',
+    title: 'AI Security Analysis Tool — Fortify Automation',
+    type: 'professional',
+    description:
+      'Built an AI-powered static analysis tool using Claude to analyze Fortify security findings across DBP repositories. Autonomously identifies false positives and submits suppressions or generates targeted code fixes, reducing manual security review burden for engineering teams.',
+    tags: ['Python', 'Click', 'Claude', 'AI', 'Fortify', 'Security Automation'],
+  },
+  {
     id: 'ai-developer-tooling',
     title: 'AI Developer Tooling — Agent Package Manager',
     type: 'professional',
