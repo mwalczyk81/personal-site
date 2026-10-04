@@ -62,7 +62,6 @@ export function useActiveSection(sectionIds: string[]): string | null {
     return () => {
       observer.disconnect()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [idsKey])
 
   return activeId

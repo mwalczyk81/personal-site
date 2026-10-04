@@ -34,6 +34,15 @@ const projects: Project[] = [
     tags: ['C#/.NET', 'Azure DevOps', 'Security Compliance'],
   },
   {
+    id: 'specprobe',
+    title: 'specprobe',
+    type: 'open-source',
+    description:
+      'A CLI that turns an OpenAPI spec into a searchable, locally-indexed knowledge base, generates schema-validated API test cases, exports runnable Postman and REST Client test suites with multi-environment configs, and spins up a local mock server to validate them against.',
+    tags: ['Python', 'OpenAPI', 'CLI', 'Testing', 'FastEmbed', 'LiteLLM'],
+    url: 'https://github.com/mwalczyk81/specprobe',
+  },
+  {
     id: 'mogboard-mcp',
     title: 'mogboard-mcp',
     type: 'open-source',
