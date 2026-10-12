@@ -21,6 +21,19 @@ describe('projects data', () => {
     expect(specprobe?.tags).toContain('CLI')
   })
 
+  it('should include querylens with complete open-source metadata', () => {
+    // Verifies that querylens is correctly added to the projects data with required open-source fields
+    const querylens = projects.find((p) => p.id === 'querylens')
+    expect(querylens).toBeDefined()
+    expect(querylens?.title).toBe('querylens')
+    expect(querylens?.type).toBe('open-source')
+    expect(querylens?.url).toBe('https://github.com/mwalczyk81/querylens')
+    expect(querylens?.description).toBeTruthy()
+    expect(querylens?.tags).toContain('Python')
+    expect(querylens?.tags).toContain('Azure Cosmos DB')
+    expect(querylens?.tags).toContain('CLI')
+  })
+
   it('should ensure all project IDs are unique', () => {
     // Prevents duplicate keys in React list rendering
     const ids = projects.map((p) => p.id)

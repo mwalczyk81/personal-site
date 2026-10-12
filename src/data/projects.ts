@@ -34,6 +34,15 @@ const projects: Project[] = [
     tags: ['C#/.NET', 'Azure DevOps', 'Security Compliance'],
   },
   {
+    id: 'querylens',
+    title: 'querylens',
+    type: 'open-source',
+    description:
+      'A read-only CLI that profiles Azure Cosmos DB for NoSQL query workloads. Ranks queries by Request Unit cost, flags high-RU queries, cross-partition fan-out, and scan-to-return gaps with metric evidence, and gates CI on finding severity. A discover mode mines Log Analytics diagnostic logs to surface the most expensive query shapes and their callers across an estate, with no Cosmos DB data-plane access required.',
+    tags: ['Python', 'Azure Cosmos DB', 'CLI', 'Performance', 'Log Analytics'],
+    url: 'https://github.com/mwalczyk81/querylens',
+  },
+  {
     id: 'specprobe',
     title: 'specprobe',
     type: 'open-source',
