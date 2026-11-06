@@ -14,7 +14,7 @@ function getInitialDark(): boolean {
  * Manages the site-wide dark mode state.
  *
  * - Reads the initial state from localStorage (falls back to prefers-color-scheme)
- * - Toggles the `dark` class on <html> so Tailwind's class-based dark variants fire
+ * - Sets data-theme="dark" | "light" on <html> (the design system's switch) and toggles `dark`
  * - Persists the choice to localStorage on every change
  */
 export function useDarkMode() {
@@ -22,11 +22,9 @@ export function useDarkMode() {
 
   useEffect(() => {
     const root = document.documentElement
-    if (isDark) {
-      root.classList.add('dark')
-    } else {
-      root.classList.remove('dark')
-    }
+    // The design system's tokens switch on data-theme; the `dark` class stays for compatibility.
+    root.dataset.theme = isDark ? 'dark' : 'light'
+    root.classList.toggle('dark', isDark)
     localStorage.setItem(STORAGE_KEY, isDark ? 'dark' : 'light')
   }, [isDark])
 

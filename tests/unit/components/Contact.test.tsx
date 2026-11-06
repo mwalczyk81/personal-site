@@ -62,7 +62,7 @@ describe('Contact component', () => {
     await user.click(screen.getByRole('button', { name: /send message/i }))
 
     await waitFor(() => {
-      expect(screen.getByText('Message sent!')).toBeInTheDocument()
+      expect(screen.getByText('Message sent.')).toBeInTheDocument()
       expect(screen.getByText(/thanks for reaching out/i)).toBeInTheDocument()
     })
   })

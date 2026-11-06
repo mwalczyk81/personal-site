@@ -22,4 +22,19 @@ describe('App component', () => {
     // Contact
     expect(screen.getByRole('region', { name: /contact/i })).toBeInTheDocument()
   })
+
+  it('should route /writing and /writing/:slug to the writing pages', () => {
+    // Verifies the pathname check renders the index and a post instead of the home sections
+    window.history.pushState({}, '', '/writing')
+    const { unmount } = render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'Writing' })).toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: /skills/i })).not.toBeInTheDocument()
+    unmount()
+
+    window.history.pushState({}, '', '/writing/automapper-to-mapperly')
+    render(<App />)
+    expect(screen.getByRole('article')).toBeInTheDocument()
+
+    window.history.pushState({}, '', '/')
+  })
 })

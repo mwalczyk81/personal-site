@@ -6,6 +6,7 @@ describe('useDarkMode hook', () => {
   beforeEach(() => {
     localStorage.clear()
     document.documentElement.classList.remove('dark')
+    document.documentElement.removeAttribute('data-theme')
   })
 
   it('should initialize to false when localStorage is empty and prefers-color-scheme is light', () => {
@@ -34,6 +35,7 @@ describe('useDarkMode hook', () => {
 
     expect(result.current.isDark).toBe(true)
     expect(document.documentElement.classList.contains('dark')).toBe(true)
+    expect(document.documentElement.dataset.theme).toBe('dark')
     expect(localStorage.getItem('color-scheme')).toBe('dark')
 
     act(() => {
@@ -42,6 +44,7 @@ describe('useDarkMode hook', () => {
 
     expect(result.current.isDark).toBe(false)
     expect(document.documentElement.classList.contains('dark')).toBe(false)
+    expect(document.documentElement.dataset.theme).toBe('light')
     expect(localStorage.getItem('color-scheme')).toBe('light')
   })
 })

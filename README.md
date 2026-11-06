@@ -16,7 +16,7 @@ This repository contains the full source code for Matt Walczyk's personal site. 
 - **Dark Mode Support**: Seamless toggle between dark and light themes with preference detection via `prefers-color-scheme` and persistence in `localStorage`.
 - **Responsive & Accessible**: Mobile-first design adhering to WCAG 2.1 AA standards, responsive across screen sizes from 375px mobile to ultra-wide displays.
 - **Formspree Contact Integration**: Client-side validated contact form with asynchronous submission, rate limit handling, and timeout safeguards.
-- **100% Test Coverage**: Comprehensive test suite with 40 unit and integration tests using Vitest 5 and React Testing Library.
+- **100% Test Coverage**: Comprehensive test suite with 47 unit and integration tests using Vitest 5 and React Testing Library.
 - **Automated Quality Gates**: Pre-commit validation via Husky and automated CI builds on GitHub Actions.
 
 ---
@@ -26,13 +26,16 @@ This repository contains the full source code for Matt Walczyk's personal site. 
 1. **Hero / About**: Professional summary, background in software engineering leadership (Director of Software Development), and verified GitHub / LinkedIn links.
 2. **Skills**: Categorized technical capabilities spanning Languages & Runtimes, Frameworks & Libraries, Testing & Quality, Infrastructure & DevOps, and Leadership & Process.
 3. **Projects**: Showcase of key work including:
-   - **Enterprise Architecture**: Fiserv Digital Banking Platform accounts service layer rewrite, AI security analysis tools, and Azure DevOps compliance automation.
-   - **Open-Source Tools**:
+   - **Professional work** (leads the section): AI security analysis tooling for Fortify findings, the Agent Package Manager, the Digital Banking Platform accounts service, and Azure DevOps compliance automation. The accounts service card links to two case studies.
+   - **Open-source tools**:
+     - [`querylens`](https://github.com/mwalczyk81/querylens): Read-only CLI that profiles Azure Cosmos DB query workloads.
      - [`specprobe`](https://github.com/mwalczyk81/specprobe): Local-first CLI turning OpenAPI specs into searchable vector indices and deterministic test suites.
+   - **Personal projects** (collapsed by default):
      - [`mogboard-mcp`](https://github.com/mwalczyk81/mogboard-mcp): Python MCP server providing FFXIV market board data to AI assistants.
      - [`mcp-fitbit-obsidian`](https://github.com/mwalczyk81/mcp-fitbit-obsidian): Python MCP server syncing Fitbit telemetry to Obsidian daily notes.
      - [`system-monitor`](https://github.com/mwalczyk81/system-monitor): Cross-platform performance monitor built with .NET MAUI and Blazor.
-4. **Contact**: Direct communication form backed by Formspree with inline error feedback and submission state management.
+4. **Writing** (`/writing`): Case studies, one page per post at `/writing/<slug>`. Posts live in `src/data/writing.ts`. Routing is a plain pathname check in `App.tsx` with no router dependency, and `vercel.json` rewrites every path to `index.html`. The navbar links to it as "Writing".
+5. **Contact**: Direct communication form backed by Formspree with inline error feedback and submission state management.
 
 ---
 
@@ -66,16 +69,19 @@ personal-site/
 │   ├── assets/                 # Profile images and visual assets
 │   ├── components/
 │   │   ├── layout/
-│   │   │   └── Navbar.tsx      # Sticky nav header with active section tracking
+│   │   │   └── Navbar.tsx      # Sticky nav header with active section tracking and a Writing link
+│   │   ├── pages/
+│   │   │   └── WritingPages.tsx # /writing index and case study pages
 │   │   └── sections/
 │   │       ├── Bio.tsx         # Hero / about section
 │   │       ├── Contact.tsx     # Formspree contact form
-│   │       ├── Projects.tsx    # Professional & open-source project grid
+│   │       ├── Projects.tsx    # Project grid with a collapsed personal projects group
 │   │       └── Skills.tsx      # Categorized skill badges
 │   ├── data/
 │   │   ├── bio.ts              # Bio text, title, and social links
 │   │   ├── projects.ts         # Project metadata, tags, and URLs
-│   │   └── skills.ts           # Skill categories and items
+│   │   ├── skills.ts           # Skill categories and items
+│   │   └── writing.ts          # Case study content
 │   ├── hooks/
 │   │   ├── useActiveSection.ts # Viewport IntersectionObserver hook
 │   │   ├── useContactForm.ts   # Form state, validation, and submission logic
@@ -89,7 +95,7 @@ personal-site/
 │   ├── setup.ts                # Vitest global setup, JSDOM stubs, and cleanups
 │   └── unit/
 │       ├── App.test.tsx        # Integration smoke tests
-│       ├── components/         # Component unit tests (Bio, Skills, Projects, Navbar, Contact)
+│       ├── components/         # Component unit tests (Bio, Skills, Projects, Navbar, Contact, Writing)
 │       ├── data/               # Data model validation and specprobe invariants
 │       └── hooks/              # Custom hook tests (active section, contact form, dark mode)
 ├── .env.example                # Example environment variables
@@ -163,7 +169,7 @@ Navigate to `http://localhost:5173` in your browser.
 
 Testing is built with **Vitest 5** and **React Testing Library**:
 
-- **Test Suite**: 40 unit and component tests across 10 dedicated test files.
+- **Test Suite**: 47 unit and component tests across 11 dedicated test files.
 - **Coverage**: **100% line coverage** across all components, custom hooks, and data definitions.
 - **Mock Strategy**: Realistic JSDOM mocks for `window.matchMedia` and `window.IntersectionObserver` with automatic cleanup between runs.
 

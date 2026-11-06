@@ -9,8 +9,6 @@ const skills: SkillCategory[] = [
       { name: 'JavaScript' },
       { name: 'Python' },
       { name: 'PowerShell' },
-      { name: 'Bash' },
-      { name: 'VB.NET' },
     ],
   },
   {
@@ -20,17 +18,15 @@ const skills: SkillCategory[] = [
       { name: 'Blazor' },
       { name: 'React' },
       { name: 'Django' },
-      { name: 'Streamlit' },
-      { name: 'NiceGUI' },
       { name: 'Click' },
       { name: 'pandas' },
+      { name: 'MCP' },
     ],
   },
   {
     name: 'Testing & Quality',
     skills: [
       { name: 'Playwright' },
-      { name: 'Selenium' },
       { name: 'Vitest' },
       { name: 'xUnit' },
       { name: 'TUnit' },
@@ -41,6 +37,9 @@ const skills: SkillCategory[] = [
   {
     name: 'Infrastructure & DevOps',
     skills: [
+      { name: 'Cosmos DB' },
+      { name: 'AKS' },
+      { name: 'Kubernetes' },
       { name: 'Docker' },
       { name: 'AWS' },
       { name: 'Azure DevOps' },

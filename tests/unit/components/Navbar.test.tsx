@@ -19,6 +19,12 @@ describe('Navbar component', () => {
     expect(screen.getByRole('link', { name: 'Contact' })).toHaveAttribute('href', '#contact')
   })
 
+  it('should link to the writing page and point section links home when off the home page', () => {
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} homePath="/" />)
+    expect(screen.getByRole('link', { name: 'Writing' })).toHaveAttribute('href', '/writing')
+    expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/#projects')
+  })
+
   it('should call onToggleDark when clicking the theme toggle button', async () => {
     // Verifies user interaction with dark mode toggle triggers state handler
     const user = userEvent.setup()

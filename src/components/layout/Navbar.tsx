@@ -16,37 +16,37 @@ const SECTION_IDS = NAV_LINKS.map(({ href }) => href.slice(1))
 interface NavbarProps {
   isDark: boolean
   onToggleDark: () => void
+  /** Set on pages other than the home page so section links point back to "/#section". */
+  homePath?: string
 }
 
-export default function Navbar({ isDark, onToggleDark }: NavbarProps) {
+export default function Navbar({ isDark, onToggleDark, homePath = '' }: NavbarProps) {
   const activeId = useActiveSection(SECTION_IDS)
 
   return (
-    <header className="sticky top-0 z-50 bg-white/95 dark:bg-slate-900/95 backdrop-blur-sm border-b border-gray-100 dark:border-slate-800">
+    <header className="sticky top-0 z-50 bg-ds-bg border-b border-ds-border">
       <nav
         className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between"
         aria-label="Main navigation"
       >
-        <span className="text-sm font-medium tracking-wide text-gray-900 dark:text-slate-100">
-          Matt Walczyk
-        </span>
+        <span className="font-serif text-lg font-semibold text-ds-text">Matt Walczyk</span>
 
         <div className="flex items-center gap-6">
           {/* Desktop links — mobile hamburger added in T027 */}
           <ul className="flex gap-8" role="list">
             {NAV_LINKS.map(({ href, label }) => {
               const sectionId = href.slice(1)
-              const isActive = sectionId === activeId
+              const isActive = !homePath && sectionId === activeId
               return (
                 <li key={href}>
                   <a
-                    href={href}
+                    href={`${homePath}${href}`}
                     aria-current={isActive ? 'true' : undefined}
                     className={[
-                      'text-sm transition-colors duration-150',
+                      'text-sm transition-colors duration-(--ds-duration-fast)',
                       isActive
-                        ? 'text-accent-600 font-medium underline underline-offset-4 decoration-2 decoration-accent-600'
-                        : 'text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100',
+                        ? 'text-ds-primary font-medium underline underline-offset-4 decoration-2 decoration-ds-primary'
+                        : 'text-ds-text-muted hover:text-ds-text',
                     ].join(' ')}
                   >
                     {label}
@@ -54,6 +54,21 @@ export default function Navbar({ isDark, onToggleDark }: NavbarProps) {
                 </li>
               )
             })}
+            {/* Writing is a separate page, not a section, so it links by path and is active on /writing pages */}
+            <li>
+              <a
+                href="/writing"
+                aria-current={homePath ? 'page' : undefined}
+                className={[
+                  'text-sm transition-colors duration-(--ds-duration-fast)',
+                  homePath
+                    ? 'text-ds-primary font-medium underline underline-offset-4 decoration-2 decoration-ds-primary'
+                    : 'text-ds-text-muted hover:text-ds-text',
+                ].join(' ')}
+              >
+                Writing
+              </a>
+            </li>
           </ul>
 
           {/* Dark mode toggle */}
@@ -61,7 +76,7 @@ export default function Navbar({ isDark, onToggleDark }: NavbarProps) {
             type="button"
             onClick={onToggleDark}
             aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
-            className="p-1.5 rounded text-gray-500 hover:text-gray-900 dark:text-slate-400 dark:hover:text-slate-100 transition-colors duration-150"
+            className="p-2 rounded-md text-ds-text-muted hover:text-ds-text hover:bg-ds-surface-hover transition-colors duration-(--ds-duration-fast)"
           >
             {isDark ? <Sun size={16} aria-hidden /> : <Moon size={16} aria-hidden />}
           </button>

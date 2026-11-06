@@ -2,16 +2,8 @@ import type { Project } from '../types'
 
 const projects: Project[] = [
   {
-    id: 'digital-banking-accounts',
-    title: 'Digital Banking Platform — Accounts Service',
-    type: 'professional',
-    description:
-      "Led delivery of the accounts service layer within a cloud-native rewrite of Fiserv's digital banking platform. Architected and maintained C#/.NET microservices on Azure, and drove a full AutoMapper-to-Mapperly migration to resolve a high-severity CVE — validated by 595 unit tests and 176 contract tests with zero regressions. Diagnosed systemic latency traced to Azure Redis Cache disconnection causing Cosmos DB fallback at scale.",
-    tags: ['C#/.NET', 'Azure', 'Microservices', 'Cosmos DB', 'Redis'],
-  },
-  {
     id: 'fortify-ai-analyzer',
-    title: 'AI Security Analysis Tool — Fortify Automation',
+    title: 'AI Security Analysis Tool: Fortify Automation',
     type: 'professional',
     description:
       'Built an AI-powered static analysis tool using Claude to analyze Fortify security findings across DBP repositories. Autonomously identifies false positives and submits suppressions or generates targeted code fixes, reducing manual security review burden for engineering teams.',
@@ -19,11 +11,23 @@ const projects: Project[] = [
   },
   {
     id: 'ai-developer-tooling',
-    title: 'AI Developer Tooling — Agent Package Manager',
+    title: 'AI Developer Tooling: Agent Package Manager',
     type: 'professional',
     description:
       'Built and distributed an Agent Package Manager (APM) to deliver GitHub Copilot skills and custom Claude agent prompts to 150+ engineers across a large .NET platform. Includes an MCP server for autonomous skill navigation and a team-wide rollout across Mac and Windows.',
     tags: ['TypeScript', 'MCP', 'GitHub Copilot', 'Azure DevOps', 'AI'],
+  },
+  {
+    id: 'digital-banking-accounts',
+    title: 'Digital Banking Platform: Accounts Service',
+    type: 'professional',
+    description:
+      "Led delivery of the accounts service layer within a cloud-native rewrite of Fiserv's digital banking platform. Architected and maintained C#/.NET microservices on Azure, and drove a full AutoMapper-to-Mapperly migration to resolve a high-severity CVE (validated by 595 unit tests and 176 contract tests with zero regressions). Diagnosed a memory leak in a shared OData library that was causing OOMKills.",
+    tags: ['C#/.NET', 'Azure', 'AKS', 'Microservices', 'Cosmos DB', 'OData'],
+    writeUps: [
+      { label: 'Read the write-up: Memory leak', path: '/writing/shared-library-memory-leak' },
+      { label: 'Read the write-up: Mapperly migration', path: '/writing/automapper-to-mapperly' },
+    ],
   },
   {
     id: 'ado-compliance-runner',
@@ -59,6 +63,7 @@ const projects: Project[] = [
       'A Python MCP server that gives AI assistants natural language access to FFXIV market board data via the Universalis API. Supports live price lookups, cross-world price comparison, sale history, market tax rates, and automated flip opportunity detection.',
     tags: ['Python', 'FastMCP', 'MCP', 'Universalis API', 'asyncio'],
     url: 'https://github.com/mwalczyk81/mogboard-mcp',
+    personal: true,
   },
   {
     id: 'mcp-fitbit-obsidian',
@@ -68,6 +73,7 @@ const projects: Project[] = [
       'Python MCP server that syncs Fitbit health data into Obsidian daily notes. Supports stdio and SSE transports, OAuth 2.0 token management, and exposes tools usable in Claude Desktop and Claude.ai.',
     tags: ['Python', 'MCP', 'Fitbit API', 'Obsidian'],
     url: 'https://github.com/mwalczyk81/mcp-fitbit-obsidian',
+    personal: true,
   },
   {
     id: 'system-monitor',
@@ -77,6 +83,7 @@ const projects: Project[] = [
       'Cross-platform system performance monitor built with .NET MAUI and Blazor. Tracks CPU, memory, GPU, disk, network, and battery metrics in real time with interactive charts.',
     tags: ['C#', 'Blazor', '.NET MAUI', 'Cross-Platform'],
     url: 'https://github.com/mwalczyk81/system-monitor',
+    personal: true,
   },
 ]
 

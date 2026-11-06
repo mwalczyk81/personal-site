@@ -7,12 +7,6 @@
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matt Walczyk — Director of Software Development</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Inter:wght@300..600&display=swap"
-    />
     <!-- SEO -->
     <meta name="description" content="Director of Software Development specializing in .NET, Azure, and AI-powered platform engineering. Based in Lincoln, Nebraska." />
     <meta name="robots" content="index, follow" />
@@ -35,7 +29,9 @@
       (function () {
         var stored = localStorage.getItem('color-scheme');
         var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        if (stored === 'dark' || (!stored && prefersDark)) {
+        var dark = stored === 'dark' || (!stored && prefersDark);
+        document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+        if (dark) {
           document.documentElement.classList.add('dark');
         }
       })();

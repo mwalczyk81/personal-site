@@ -5,10 +5,10 @@ const bio: BioData = {
   name: 'Matt Walczyk',
   title: 'Director of Software Development',
   summary:
-    'I build and lead software teams that ship products people rely on. ' +
-    'With a background spanning full-stack engineering, platform development, and team leadership, ' +
-    'I bring both the technical depth to solve hard problems and the people focus to help teams do their best work. ' +
-    "I'm passionate about clean systems, developer experience, and building things that last.",
+    'I lead two engineering teams (16 engineers) building the Digital Banking Platform, ' +
+    'a cloud-native API platform serving 2,000+ financial institutions on C#/.NET, Azure, Cosmos DB, and AKS. ' +
+    'I care about clear, idiomatic code over clever patterns. ' +
+    'I also build developer tooling, including AI tooling.',
 
   socialLinks: [
     {

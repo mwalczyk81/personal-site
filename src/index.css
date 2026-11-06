@@ -1,50 +1,72 @@
 @import "tailwindcss";
 
-/* Class-based dark mode: applies dark: variants when <html class="dark"> is set */
-@custom-variant dark (&:is(.dark *));
+/* Matt's Design System, vendored copy-only (see src/ds/SYNC.md). Never edit these by hand.
+   tokens.css first, then bundle.css; linking tokens alone loses the focus rings. */
+@import "./ds/tokens.css";
+@import "./ds/components/bundle.css";
 
-@theme {
-  /* Typography */
-  --font-display: "Fraunces", serif;
-  --font-sans: "Inter", system-ui, sans-serif;
+/* Dark mode follows the design system: data-theme="dark" on <html>. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
-  /* Accent color scale — warm stone (oklch, hue ~60) */
-  --color-accent-50:  oklch(98%  0.02 60);
-  --color-accent-100: oklch(95%  0.04 60);
-  --color-accent-200: oklch(89%  0.06 60);
-  --color-accent-300: oklch(81%  0.08 60);
-  --color-accent-400: oklch(72%  0.09 60);
-  --color-accent-500: oklch(63%  0.10 60);
-  --color-accent-600: oklch(54%  0.10 60);
-  --color-accent-700: oklch(44%  0.09 60);
-  --color-accent-800: oklch(34%  0.07 60);
-  --color-accent-900: oklch(25%  0.05 60);
+/* Semantic tokens exposed as Tailwind utilities (bg-ds-surface, text-ds-text-muted, ...).
+   `inline` keeps the utilities pointing at the live --ds-* variables, so dark mode needs no
+   dark: variants. Components use these names, never raw palette steps. */
+@theme inline {
+  --color-ds-bg: var(--ds-bg);
+  --color-ds-bg-subtle: var(--ds-bg-subtle);
+  --color-ds-surface: var(--ds-surface);
+  --color-ds-surface-hover: var(--ds-surface-hover);
+  --color-ds-border: var(--ds-border);
+  --color-ds-border-control: var(--ds-border-control);
+  --color-ds-text: var(--ds-text);
+  --color-ds-text-secondary: var(--ds-text-secondary);
+  --color-ds-text-muted: var(--ds-text-muted);
+  --color-ds-text-on-accent: var(--ds-text-on-accent);
+  --color-ds-primary: var(--ds-primary);
+  --color-ds-primary-subtle: var(--ds-primary-subtle);
+  --color-ds-primary-subtle-text: var(--ds-primary-subtle-text);
+  --color-ds-primary-solid: var(--ds-primary-solid);
+  --color-ds-primary-solid-hover: var(--ds-primary-solid-hover);
+  --color-ds-focus-ring: var(--ds-focus-ring);
+  --color-ds-success-text: var(--ds-success-text);
+  --color-ds-warning-subtle: var(--ds-warning-subtle);
+  --color-ds-warning-text: var(--ds-warning-text);
+  --color-ds-danger: var(--ds-danger);
+  --color-ds-danger-subtle: var(--ds-danger-subtle);
+  --color-ds-danger-text: var(--ds-danger-text);
 
-  /* Motion */
-  --duration-fast: 150ms;
+  /* Display face for the hero and page titles (IBM Plex Serif). font-sans is already Plex
+     Sans through tokens.css, and font-mono is Plex Mono. */
+  --font-serif: var(--ds-font-display);
+
+  --shadow-ds-sm: var(--ds-shadow-sm);
+  --shadow-ds-md: var(--ds-shadow-md);
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: white;
+  background-color: var(--ds-bg);
 }
 
-html.dark {
-  background-color: #0f172a;
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+body {
+  background-color: var(--ds-bg);
+  color: var(--ds-text);
+  font-family: var(--ds-font-sans);
+  line-height: var(--ds-leading-normal);
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Hero section gradient — overridden for dark mode via the .dark ancestor class */
-.hero-gradient {
-  background: linear-gradient(135deg, white 0%, var(--color-accent-100) 100%);
+/* Text inputs draw their own ring: border recolor plus a 2px ring with no offset
+   (design system README, "Focus"). Unlayered so it beats bundle.css's global ring. */
+.ds-field:focus-visible {
+  outline-offset: 0;
+  border-color: var(--ds-focus-ring);
 }
 
-.dark .hero-gradient {
-  /* Warm dark: deep navy fading to dark warm-stone */
-  background: linear-gradient(135deg, #0f172a 0%, #1c1917 100%);
+.ds-field[aria-invalid="true"]:focus-visible {
+  border-color: var(--ds-danger);
 }
