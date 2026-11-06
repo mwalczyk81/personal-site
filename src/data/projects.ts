@@ -22,7 +22,7 @@ const projects: Project[] = [
     title: 'Digital Banking Platform: Accounts Service',
     type: 'professional',
     description:
-      "Led delivery of the accounts service layer within a cloud-native rewrite of Fiserv's digital banking platform. Architected and maintained C#/.NET microservices on Azure, and drove a full AutoMapper-to-Mapperly migration to resolve a high-severity CVE (validated by 595 unit tests and 176 contract tests with zero regressions), using a Claude skill to guide AI-assisted migration of services off AutoMapper. Diagnosed a memory leak in a shared OData library that was causing OOMKills.",
+      "Led delivery of the accounts service layer within a cloud-native rewrite of Fiserv's digital banking platform. Architected and maintained C#/.NET microservices on Azure. Drove a full AutoMapper-to-Mapperly migration to close a high-severity CVE, validated by 595 unit tests and 176 contract tests with zero regressions. Used a Claude skill to guide AI-assisted migration of other services. Diagnosed a memory leak in a shared OData library that was causing OOMKills.",
     tags: ['C#/.NET', 'Azure', 'AKS', 'Microservices', 'Cosmos DB', 'OData'],
     writeUps: [
       { label: 'Read the write-up: Memory leak', path: '/writing/shared-library-memory-leak' },

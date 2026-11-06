@@ -85,7 +85,7 @@ export default function Projects() {
         {personal.length > 0 && (
           <details className="mt-16 group">
             <summary className="cursor-pointer select-none text-sm font-medium text-ds-text-secondary hover:text-ds-text transition-colors duration-(--ds-duration-fast)">
-              Personal projects
+              Personal projects: mogboard-mcp, Fitbit MCP, System Monitor
             </summary>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
               {personal.map((project) => (

@@ -16,7 +16,7 @@ This repository contains the full source code for Matt Walczyk's personal site. 
 - **Dark Mode Support**: Seamless toggle between dark and light themes with preference detection via `prefers-color-scheme` and persistence in `localStorage`.
 - **Responsive & Accessible**: Mobile-first design adhering to WCAG 2.1 AA standards, responsive across screen sizes from 375px mobile to ultra-wide displays.
 - **Formspree Contact Integration**: Client-side validated contact form with asynchronous submission, rate limit handling, and timeout safeguards.
-- **100% Test Coverage**: Comprehensive test suite with 50 unit and integration tests using Vitest 5 and React Testing Library.
+- **100% Test Coverage**: Comprehensive test suite with 54 unit and integration tests using Vitest 5 and React Testing Library.
 - **Automated Quality Gates**: Pre-commit validation via Husky and automated CI builds on GitHub Actions.
 
 ---
@@ -169,7 +169,7 @@ Navigate to `http://localhost:5173` in your browser.
 
 Testing is built with **Vitest 5** and **React Testing Library**:
 
-- **Test Suite**: 50 unit and component tests across 11 dedicated test files.
+- **Test Suite**: 54 unit and component tests across 11 dedicated test files.
 - **Coverage**: **100% line coverage** across all components, custom hooks, and data definitions.
 - **Mock Strategy**: Realistic JSDOM mocks for `window.matchMedia` and `window.IntersectionObserver` with automatic cleanup between runs.
 

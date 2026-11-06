@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { render, screen } from '@testing-library/react'
+import { act, render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Navbar from '../../../src/components/layout/Navbar'
 
@@ -29,6 +29,61 @@ describe('Navbar component', () => {
     render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
     const labels = screen.getAllByRole('link').map((a) => a.textContent)
     expect(labels.indexOf('Writing')).toBe(labels.indexOf('Contact') - 1)
+  })
+
+  it('should open and close the mobile menu with correct aria state', async () => {
+    // Verifies the menu button toggles aria-expanded and reveals the panel its aria-controls points at
+    const user = userEvent.setup()
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
+    const button = screen.getByRole('button', { name: /open menu/i })
+    const panel = document.getElementById(button.getAttribute('aria-controls')!)!
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(panel).not.toBeVisible()
+
+    await user.click(button)
+    expect(screen.getByRole('button', { name: /close menu/i })).toHaveAttribute('aria-expanded', 'true')
+    expect(panel).toBeVisible()
+  })
+
+  it('should close the menu and return focus to the button on Escape', async () => {
+    const user = userEvent.setup()
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    await user.keyboard('{Escape}')
+    const button = screen.getByRole('button', { name: /open menu/i })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(button).toHaveFocus()
+  })
+
+  it('should close the menu and return focus to the button when a menu link is clicked', async () => {
+    const user = userEvent.setup()
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    const panelLinks = within(document.getElementById('mobile-nav-panel')!).getAllByRole('link')
+    expect(panelLinks.map((a) => a.textContent)).toEqual(['About', 'Skills', 'Projects', 'Writing', 'Contact'])
+    await user.click(panelLinks[2])
+    const button = screen.getByRole('button', { name: /open menu/i })
+    expect(button).toHaveAttribute('aria-expanded', 'false')
+    expect(button).toHaveFocus()
+  })
+
+  it('should close the open menu when the viewport grows past the mobile breakpoint', async () => {
+    // Verifies aria-expanded cannot go stale after a resize to the desktop layout
+    const user = userEvent.setup()
+    let onChange: ((event: MediaQueryListEvent) => void) | undefined
+    window.matchMedia = vi.fn().mockImplementation(() => ({
+      matches: false,
+      addEventListener: (_: string, cb: (event: MediaQueryListEvent) => void) => {
+        onChange = cb
+      },
+      removeEventListener: vi.fn(),
+    }))
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
+    await user.click(screen.getByRole('button', { name: /open menu/i }))
+    expect(screen.getByRole('button', { name: /close menu/i })).toBeInTheDocument()
+
+    act(() => onChange?.({ matches: true } as MediaQueryListEvent))
+    expect(screen.getByRole('button', { name: /open menu/i })).toHaveAttribute('aria-expanded', 'false')
   })
 
   it('should call onToggleDark when clicking the theme toggle button', async () => {

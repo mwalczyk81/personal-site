@@ -42,11 +42,11 @@ function SocialLinkItem({ link }: { link: SocialLink }) {
 export default function Bio() {
   return (
     // Flat page ground: the design system has no gradients or washes.
-    <div className="bg-ds-bg min-h-screen">
+    <div className="bg-ds-bg">
       <section
         id="bio"
         aria-label="About"
-        className="min-h-screen flex flex-col justify-center px-6 py-24 max-w-5xl mx-auto"
+        className="min-h-[70svh] flex flex-col justify-center px-6 py-16 sm:py-24 max-w-5xl mx-auto"
       >
         {bio.location && (
           <p className="text-xs font-medium tracking-[0.04em] text-ds-text-muted mb-6">
