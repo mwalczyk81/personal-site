@@ -1,6 +1,5 @@
 import type { BioData } from '../types'
 
-// TODO: Replace placeholder URLs with real profile links before going live.
 const bio: BioData = {
   name: 'Matt Walczyk',
   title: 'Director of Software Development',
@@ -13,12 +12,12 @@ const bio: BioData = {
   socialLinks: [
     {
       platform: 'github',
-      url: 'https://github.com/mwalczyk81',   // TODO: confirm username
+      url: 'https://github.com/mwalczyk81',
       label: 'GitHub profile',
     },
     {
       platform: 'linkedin',
-      url: 'https://linkedin.com/in/walczykmatthew', // TODO: confirm handle
+      url: 'https://linkedin.com/in/walczykmatthew',
       label: 'LinkedIn profile',
     },
   ],

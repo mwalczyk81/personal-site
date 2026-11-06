@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Navbar from './components/layout/Navbar'
 import Bio from './components/sections/Bio'
 import Skills from './components/sections/Skills'
@@ -15,6 +16,13 @@ function getPath(): string {
 export default function App() {
   const { isDark, toggle } = useDarkMode()
   const path = getPath()
+
+  // The sections render after load, so the browser's own hash scroll finds nothing.
+  // Scroll to the target once on mount so deep links like /#projects work.
+  useEffect(() => {
+    const id = window.location.hash.slice(1)
+    if (id) document.getElementById(decodeURIComponent(id))?.scrollIntoView()
+  }, [])
 
   if (path === '/writing' || path.startsWith('/writing/')) {
     const slug = path.slice('/writing/'.length)

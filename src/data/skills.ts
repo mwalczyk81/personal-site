@@ -37,6 +37,7 @@ const skills: SkillCategory[] = [
   {
     name: 'Infrastructure & DevOps',
     skills: [
+      { name: 'Azure' },
       { name: 'Cosmos DB' },
       { name: 'AKS' },
       { name: 'Kubernetes' },
@@ -52,11 +53,9 @@ const skills: SkillCategory[] = [
     name: 'Leadership & Process',
     skills: [
       { name: 'Engineering Management' },
-      { name: 'Team Building' },
       { name: 'Technical Roadmaps' },
       { name: 'Code Review' },
       { name: 'Agile / Scrum' },
-      { name: 'Mentoring' },
     ],
   },
 ]

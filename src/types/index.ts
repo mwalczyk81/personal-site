@@ -51,6 +51,8 @@ export interface WritingSection {
 
 export interface WritingPost {
   slug: string;
+  /** Publish date, ISO format (YYYY-MM-DD). */
+  date: string;
   title: string;
   summary: string;
   sections: WritingSection[];

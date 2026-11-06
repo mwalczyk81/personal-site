@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
 import { render, screen } from '@testing-library/react'
 import App from '../../src/App'
 
@@ -21,6 +21,17 @@ describe('App component', () => {
 
     // Contact
     expect(screen.getByRole('region', { name: /contact/i })).toBeInTheDocument()
+  })
+
+  it('should scroll to the section named in the URL hash on load', () => {
+    // Verifies deep links like /#projects work even though sections render after page load
+    const scrollIntoView = vi.fn()
+    Element.prototype.scrollIntoView = scrollIntoView
+    window.history.pushState({}, '', '/#projects')
+    render(<App />)
+    expect(scrollIntoView).toHaveBeenCalledTimes(1)
+    expect(scrollIntoView.mock.contexts[0]).toBe(document.getElementById('projects'))
+    window.history.pushState({}, '', '/')
   })
 
   it('should route /writing and /writing/:slug to the writing pages', () => {

@@ -22,6 +22,22 @@ function Text({ children }: { children: string }) {
   )
 }
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+// "2026-11-05" -> "Nov 5, 2026". Parsed by hand so the timezone can never shift the day.
+function formatDate(iso: string): string {
+  const [year, month, day] = iso.split('-').map(Number)
+  return `${MONTHS[month - 1]} ${day}, ${year}`
+}
+
+function PostDate({ date, className }: { date: string; className: string }) {
+  return (
+    <time dateTime={date} className={className}>
+      {formatDate(date)}
+    </time>
+  )
+}
+
 const BACK_LINK_CLASS =
   'inline-flex items-center gap-2 text-sm text-ds-text-muted hover:text-ds-text transition-colors duration-(--ds-duration-fast) mb-10'
 
@@ -38,7 +54,7 @@ export function WritingIndex() {
         <ul className="flex flex-col gap-8" role="list">
           {writing.map((post) => (
             <li key={post.slug}>
-              <h2 className="text-lg font-semibold leading-tight text-ds-text mb-2">
+              <h2 className="text-lg font-semibold leading-tight text-ds-text mb-1">
                 <a
                   href={`/writing/${post.slug}`}
                   className="hover:text-ds-primary transition-colors duration-(--ds-duration-fast)"
@@ -46,6 +62,7 @@ export function WritingIndex() {
                   {post.title}
                 </a>
               </h2>
+              <PostDate date={post.date} className="block text-sm text-ds-text-muted mb-2" />
               <p className="text-sm text-ds-text-secondary leading-relaxed">
                 {post.summary}
               </p>
@@ -81,9 +98,10 @@ export function WritingPostPage({ slug }: { slug: string }) {
         <a href="/writing" className={BACK_LINK_CLASS}>
           <ArrowLeft size={14} aria-hidden /> All writing
         </a>
-        <h1 className="font-serif text-3xl font-semibold leading-tight text-ds-text mb-12">
+        <h1 className="font-serif text-3xl font-semibold leading-tight text-ds-text mb-3">
           {post.title}
         </h1>
+        <PostDate date={post.date} className="block text-sm text-ds-text-muted mb-12" />
         {post.sections.map((section) => (
           <div key={section.heading} className="mb-10">
             <h2 className="text-xl font-semibold leading-tight text-ds-text mb-4">

@@ -4,6 +4,7 @@ import type { WritingPost } from '../types'
 const writing: WritingPost[] = [
   {
     slug: 'shared-library-memory-leak',
+    date: '2026-11-05',
     title: 'Finding a memory leak in a shared library',
     summary:
       'Accounts service pods kept getting OOMKilled. Two weeks of theories got me nowhere. One heap dump found the leak in a shared OData library.',
@@ -40,6 +41,7 @@ const writing: WritingPost[] = [
           'The fix was a static ConcurrentDictionary<Type, IEdmModel> in the shared library. Each CLR type now builds its model once and reuses it. That is safe because the model is deterministic per type and carries no request-specific state.',
           'I committed the fix on April 28 and it deployed on April 29.',
           'EdmModel instances went from 17,792 to 4. At about 14 hours of uptime, memory had been over 1000 Mi and climbing. It now sits stable between 530 and 547 Mi. Restarts went from 1 to 3 per pod per day to zero.',
+          'Every service that consumes the shared library has since been updated to the fixed package version.',
         ],
       },
       {
@@ -53,6 +55,7 @@ const writing: WritingPost[] = [
   },
   {
     slug: 'automapper-to-mapperly',
+    date: '2026-11-05',
     title: 'Replacing AutoMapper with Mapperly to close a high-severity CVE',
     summary:
       'A scan flagged AutoMapper and a fixed version needed a commercial license. So I replaced it, and the tests said nothing broke.',
@@ -60,7 +63,7 @@ const writing: WritingPost[] = [
       {
         heading: 'The situation',
         paragraphs: [
-          'A Sonatype scan flagged a high-severity vulnerability in AutoMapper in the accounts service.',
+          'A Sonatype scan flagged a high-severity vulnerability in AutoMapper in the accounts service. That is separate from the transfers service, which I used as the trial.',
           'Our policy is that high findings must be resolved within 30 days. So the clock was running.',
           'The obvious fix was to upgrade. That was not an option. A fixed version of AutoMapper required a commercial license. A plain upgrade was off the table, so I replaced the library instead.',
         ],
@@ -76,8 +79,8 @@ const writing: WritingPost[] = [
         heading: 'How I approached it',
         paragraphs: [
           'I chose Mapperly. It uses compile-time source generation instead of runtime mapping. That should improve performance and memory use. I did not measure either one, so that is the reason I picked it, not a result I can show you.',
-          'I did not try to migrate everything at once. I migrated one service first as a trial and wrote down what I found along the way.',
-          'Then I turned those findings into a skill. It guides AI-assisted migration of the rest. The trial taught me what the migration actually involves, and the skill carried that forward so I did not have to rediscover it each time.',
+          'I migrated the transfers service first as a trial and wrote down what I found.',
+          'Then I turned those findings into a skill. It guides AI-assisted migration of the other services. The trial taught me what the migration actually involves, and the skill carried that forward so I did not have to rediscover it each time.',
           'The tests stayed as the safety net the whole way through.',
         ],
       },
@@ -86,14 +89,13 @@ const writing: WritingPost[] = [
         paragraphs: [
           'AutoMapper is gone and the vulnerability is closed. All 595 unit tests and 176 contract tests passed, with zero regressions.',
           'Our CI/CD pipeline scans every build. So the clean scan came from the first build after the migration. The whole thing shipped within 3 days.',
-          'I did not measure build time or runtime performance, so I have nothing to report on either.',
         ],
       },
       {
         heading: "What I'd do differently",
         paragraphs: [
           'First, I would move off libraries sooner when they have no upgrade path or look unmaintained. I did this on a deadline because a CVE forced it. I would rather do it on my own schedule, before anyone is counting days.',
-          'Second, I would look for edge cases at the start. AutoMapper did some things by default that were not obvious. Mapperly does not do them. Those differences showed up as surprises during the migration. Hunting for them up front would have been cheaper.',
+          'Second, I would look for edge cases at the start. The one that got me was null handling. AutoMapper handled nulls by default in ways that were not obvious. It silently skipped a null and gave the property a default or empty value. Mapperly passed the null through, and that left the field out of the API response. The difference showed up during the migration.',
         ],
       },
     ],

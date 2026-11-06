@@ -31,3 +31,14 @@ describe('Writing pages', () => {
     for (const path of paths) expect(slugs.has(path)).toBe(true)
   })
 })
+
+describe('Writing dates', () => {
+  it('should show the formatted publish date on the index and on the post', () => {
+    const { unmount } = render(<WritingIndex />)
+    expect(screen.getAllByText('Nov 5, 2026')).toHaveLength(writing.length)
+    unmount()
+
+    render(<WritingPostPage slug={writing[0].slug} />)
+    expect(screen.getByText('Nov 5, 2026')).toHaveAttribute('datetime', '2026-11-05')
+  })
+})

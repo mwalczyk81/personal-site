@@ -25,6 +25,12 @@ describe('Navbar component', () => {
     expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/#projects')
   })
 
+  it('should place Writing before Contact in the nav', () => {
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
+    const labels = screen.getAllByRole('link').map((a) => a.textContent)
+    expect(labels.indexOf('Writing')).toBe(labels.indexOf('Contact') - 1)
+  })
+
   it('should call onToggleDark when clicking the theme toggle button', async () => {
     // Verifies user interaction with dark mode toggle triggers state handler
     const user = userEvent.setup()
