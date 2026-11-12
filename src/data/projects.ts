@@ -38,6 +38,52 @@ const projects: Project[] = [
     tags: ['C#/.NET', 'Azure DevOps', 'Security Compliance'],
   },
   {
+    id: 'roleradar',
+    title: 'RoleRadar',
+    type: 'open-source',
+    description:
+      'Long-term memory for AI agents over MCP, and a job-search tracker with a web UI. Local-first: everything stays on your machine, every write is audited, and nothing is ever hard-deleted. It runs my own job search. The public repo contains fictional data only.',
+    tags: ['.NET 10', 'MongoDB replica set', 'React Router v7', 'Duende IdentityServer', 'OpenTelemetry', 'Docker'],
+    url: 'https://github.com/mwalczyk81/roleradar',
+    writeUps: [
+      {
+        label: 'Read the write-up: Spec-first AI agents',
+        path: '/writing/what-held-up-spec-first-ai-agents',
+      },
+    ],
+    page: {
+      tagline: 'A local-first job-search tracker with an MCP server and a CLI on one data store.',
+      facts: [
+        'v0.1.0 released Nov 12, 2026',
+        '16 specs, 53 ADRs, 99 pull requests',
+        '2,253 .NET tests and 1,368 web tests, plus 154 browser tests',
+        'Mutation score floor of 81 on the web library code',
+        '85 percent line coverage floor on Domain and Application',
+      ],
+      links: [
+        { label: 'Repository', url: 'https://github.com/mwalczyk81/roleradar' },
+        { label: 'Release v0.1.0', url: 'https://github.com/mwalczyk81/roleradar/releases/tag/v0.1.0' },
+        {
+          label: 'How AI-written code is governed',
+          url: 'https://github.com/mwalczyk81/roleradar/blob/main/docs/ai-assisted-development.md',
+        },
+        { label: 'Reports site', url: 'https://mwalczyk81.github.io/roleradar/' },
+      ],
+      image: {
+        light: '/images/roleradar/insights-light.webp',
+        dark: '/images/roleradar/insights-dark.webp',
+        alt: 'The Insights page over fictional demo data: a postings funnel and an applications funnel.',
+        width: 1200,
+        height: 1084,
+      },
+      tryIt: {
+        text: 'Clone the repo and start the demo stack with Docker Compose. The steps are in the',
+        linkLabel: 'README',
+        url: 'https://github.com/mwalczyk81/roleradar#try-the-demo',
+      },
+    },
+  },
+  {
     id: 'querylens',
     title: 'querylens',
     type: 'open-source',

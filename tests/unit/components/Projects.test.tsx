@@ -32,6 +32,35 @@ describe('Projects component', () => {
     expect(specprobeLink).toHaveAttribute('rel', 'noopener noreferrer')
   })
 
+  it('should render RoleRadar with its tags, repo link, project page link and write-up link', () => {
+    // Same card as querylens and specprobe, plus links to the project page and the case study
+    render(<Projects />)
+    expect(screen.getByRole('heading', { level: 3, name: 'RoleRadar' })).toBeInTheDocument()
+
+    const repo = screen.getByRole('link', { name: /visit roleradar/i })
+    expect(repo).toHaveAttribute('href', 'https://github.com/mwalczyk81/roleradar')
+    expect(repo).toHaveAttribute('target', '_blank')
+    expect(repo).toHaveAttribute('rel', 'noopener noreferrer')
+
+    expect(screen.getByRole('link', { name: /roleradar project page/i })).toHaveAttribute(
+      'href',
+      '/projects/roleradar',
+    )
+    expect(screen.getByRole('link', { name: /write-up: spec-first ai agents/i })).toHaveAttribute(
+      'href',
+      '/writing/what-held-up-spec-first-ai-agents',
+    )
+    for (const tag of ['.NET 10', 'MongoDB replica set', 'React Router v7', 'Duende IdentityServer', 'OpenTelemetry', 'Docker']) {
+      expect(screen.getByText(tag)).toBeInTheDocument()
+    }
+  })
+
+  it('should list RoleRadar in the main grid, not under Personal projects', () => {
+    render(<Projects />)
+    const card = screen.getByRole('heading', { level: 3, name: 'RoleRadar' })
+    expect(card.closest('details')).toBeNull()
+  })
+
   it('should render external links for open-source projects and badges for professional projects', () => {
     // Verifies open-source vs professional visual distinction
     render(<Projects />)

@@ -28,15 +28,18 @@ This repository contains the full source code for Matt Walczyk's personal site. 
 3. **Projects**: Showcase of key work including:
    - **Professional work** (leads the section): AI security analysis tooling for Fortify findings, the Agent Package Manager, the Digital Banking Platform accounts service, and Azure DevOps compliance automation. The accounts service card links to two case studies.
    - **Open-source tools**:
+     - [`RoleRadar`](https://github.com/mwalczyk81/roleradar): Local-first job-search tracker with an MCP server and a CLI on one data store. Its card links to a project page at `/projects/roleradar` and to a write-up.
      - [`querylens`](https://github.com/mwalczyk81/querylens): Read-only CLI that profiles Azure Cosmos DB query workloads.
      - [`specprobe`](https://github.com/mwalczyk81/specprobe): Local-first CLI turning OpenAPI specs into searchable vector indices and deterministic test suites.
    - **Personal projects** (collapsed by default):
      - [`mogboard-mcp`](https://github.com/mwalczyk81/mogboard-mcp): Python MCP server providing FFXIV market board data to AI assistants.
      - [`mcp-fitbit-obsidian`](https://github.com/mwalczyk81/mcp-fitbit-obsidian): Python MCP server syncing Fitbit telemetry to Obsidian daily notes.
      - [`system-monitor`](https://github.com/mwalczyk81/system-monitor): Cross-platform performance monitor built with .NET MAUI and Blazor.
-4. **Writing** (`/writing`): Case studies, one page per post at `/writing/<slug>`. Posts live in `src/data/writing.ts`. Routing is a plain pathname check in `App.tsx` with no router dependency, and `vercel.json` rewrites every path to `index.html`. The navbar links to it as "Writing".
-5. **Contact**: Direct communication form backed by Formspree with inline error feedback and submission state management.
+4. **Writing** (`/writing`): Case studies, one page per post at `/writing/<slug>`, newest first. Posts live in `src/data/writing.ts` and can carry an intro, `###` lead-in subsections and related links. The navbar links to it as "Writing".
+5. **Project pages** (`/projects/<id>`): A project gets its own page when its entry in `src/data/projects.ts` has a `page` field (tagline, facts, links, a light and dark image pair, and a Try it line). Images live in `public/images/<project>/` as WebP and follow the theme switch with `dark:hidden` and `hidden dark:block`. Only RoleRadar has one so far.
+6. **Contact**: Direct communication form backed by Formspree with inline error feedback and submission state management.
 
+Routing for `/writing` and `/projects` is a plain pathname check in `App.tsx` with no router dependency, and `vercel.json` rewrites every path to `index.html`. There is no sitemap or RSS feed.
 ---
 
 ## Tech Stack
@@ -64,13 +67,14 @@ personal-site/
 │       └── ci.yml               # GitHub Actions CI workflow (lint, test, build)
 ├── .husky/
 │   └── pre-commit              # Git pre-commit hook (lint, test, build)
-├── public/                     # Static favicons, OG image, and SVG icons
+├── public/                     # Static favicons, OG image, SVG icons, and project images (images/)
 ├── src/
 │   ├── assets/                 # Profile images and visual assets
 │   ├── components/
 │   │   ├── layout/
 │   │   │   └── Navbar.tsx      # Sticky nav header with active section tracking and a Writing link
 │   │   ├── pages/
+│   │   │   ├── ProjectPages.tsx # /projects/<id> project pages
 │   │   │   └── WritingPages.tsx # /writing index and case study pages
 │   │   └── sections/
 │   │       ├── Bio.tsx         # Hero / about section
@@ -95,7 +99,7 @@ personal-site/
 │   ├── setup.ts                # Vitest global setup, JSDOM stubs, and cleanups
 │   └── unit/
 │       ├── App.test.tsx        # Integration smoke tests
-│       ├── components/         # Component unit tests (Bio, Skills, Projects, Navbar, Contact, Writing)
+│       ├── components/         # Component unit tests (Bio, Skills, Projects, Navbar, Contact, Writing, Project pages)
 │       ├── data/               # Data model validation and specprobe invariants
 │       └── hooks/              # Custom hook tests (active section, contact form, dark mode)
 ├── .env.example                # Example environment variables

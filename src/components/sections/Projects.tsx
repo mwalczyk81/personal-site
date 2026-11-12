@@ -25,9 +25,19 @@ function ProjectCard({ project }: { project: Project }) {
 
     <p className="text-sm text-ds-text-secondary leading-relaxed flex-1">{project.description}</p>
 
-    {project.writeUps && project.writeUps.length > 0 && (
+    {((project.writeUps && project.writeUps.length > 0) || project.page) && (
       <ul className="flex flex-col gap-1" role="list">
-        {project.writeUps.map((w) => (
+        {project.page && (
+          <li>
+            <a
+              href={`/projects/${project.id}`}
+              className="text-sm text-ds-primary hover:underline underline-offset-4"
+            >
+              {project.title} project page
+            </a>
+          </li>
+        )}
+        {project.writeUps?.map((w) => (
           <li key={w.path}>
             <a
               href={w.path}

@@ -48,4 +48,20 @@ describe('App component', () => {
 
     window.history.pushState({}, '', '/')
   })
+
+  it('should route /projects/:id to the project page and leave Writing unhighlighted', () => {
+    // Verifies the pathname check renders the project page, not the home sections
+    window.history.pushState({}, '', '/projects/roleradar')
+    const { unmount } = render(<App />)
+    expect(screen.getByRole('heading', { level: 1, name: 'RoleRadar' })).toBeInTheDocument()
+    expect(screen.queryByRole('region', { name: /skills/i })).not.toBeInTheDocument()
+    expect(screen.getAllByRole('link', { name: 'Writing' }).every((a) => !a.hasAttribute('aria-current'))).toBe(true)
+    unmount()
+
+    window.history.pushState({}, '', '/projects/nope')
+    render(<App />)
+    expect(screen.getByRole('heading', { name: /project not found/i })).toBeInTheDocument()
+
+    window.history.pushState({}, '', '/')
+  })
 })

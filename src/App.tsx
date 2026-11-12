@@ -5,10 +5,11 @@ import Skills from './components/sections/Skills'
 import Projects from './components/sections/Projects'
 import Contact from './components/sections/Contact'
 import { WritingIndex, WritingPostPage } from './components/pages/WritingPages'
+import { ProjectDetailPage } from './components/pages/ProjectPages'
 import { useDarkMode } from './hooks/useDarkMode'
 
 // No router dependency: the site is static and Vercel rewrites every path to index.html,
-// so a plain pathname check is enough for /writing and /writing/:slug.
+// so a plain pathname check is enough for /writing, /writing/:slug and /projects/:id.
 function getPath(): string {
   return window.location.pathname.replace(/\/+$/, '') || '/'
 }
@@ -30,6 +31,18 @@ export default function App() {
       <>
         <Navbar isDark={isDark} onToggleDark={toggle} homePath="/" />
         <main>{path === '/writing' ? <WritingIndex /> : <WritingPostPage slug={slug} />}</main>
+      </>
+    )
+  }
+
+  if (path.startsWith('/projects/')) {
+    const id = path.slice('/projects/'.length)
+    return (
+      <>
+        <Navbar isDark={isDark} onToggleDark={toggle} homePath="/" activePath="/projects" />
+        <main>
+          <ProjectDetailPage id={id} />
+        </main>
       </>
     )
   }

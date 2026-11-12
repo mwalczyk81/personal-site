@@ -38,7 +38,19 @@ function PostDate({ date, className }: { date: string; className: string }) {
   )
 }
 
-const BACK_LINK_CLASS =
+function Paragraphs({ paragraphs }: { paragraphs: string[] }) {
+  return (
+    <>
+      {paragraphs.map((paragraph, i) => (
+        <p key={i} className="text-base text-ds-text-secondary leading-relaxed mb-4">
+          <Text>{paragraph}</Text>
+        </p>
+      ))}
+    </>
+  )
+}
+
+export const BACK_LINK_CLASS =
   'inline-flex items-center gap-2 text-sm text-ds-text-muted hover:text-ds-text transition-colors duration-(--ds-duration-fast) mb-10'
 
 export function WritingIndex() {
@@ -102,21 +114,49 @@ export function WritingPostPage({ slug }: { slug: string }) {
           {post.title}
         </h1>
         <PostDate date={post.date} className="block text-sm text-ds-text-muted mb-12" />
+        {post.intro && (
+          <div className="mb-10">
+            <Paragraphs paragraphs={post.intro} />
+          </div>
+        )}
         {post.sections.map((section) => (
           <div key={section.heading} className="mb-10">
             <h2 className="text-xl font-semibold leading-tight text-ds-text mb-4">
               {section.heading}
             </h2>
-            {section.paragraphs.map((paragraph, i) => (
-              <p
-                key={i}
-                className="text-base text-ds-text-secondary leading-relaxed mb-4"
-              >
-                <Text>{paragraph}</Text>
-              </p>
+            <Paragraphs paragraphs={section.paragraphs} />
+            {section.subsections?.map((sub) => (
+              <div key={sub.heading} className="mt-6">
+                <h3 className="text-base font-semibold leading-tight text-ds-text mb-2">
+                  {sub.heading}
+                </h3>
+                <Paragraphs paragraphs={sub.paragraphs} />
+              </div>
             ))}
           </div>
         ))}
+        {post.links && post.links.length > 0 && (
+          <ul
+            role="list"
+            aria-label="Related links"
+            className="flex flex-col gap-2 border-t border-ds-border pt-6"
+          >
+            {post.links.map((link) => {
+              const external = !link.href.startsWith('/')
+              return (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+                    className="text-sm text-ds-primary hover:underline underline-offset-4"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              )
+            })}
+          </ul>
+        )}
       </div>
     </article>
   )

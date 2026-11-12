@@ -25,6 +25,17 @@ describe('Navbar component', () => {
     expect(screen.getByRole('link', { name: 'Projects' })).toHaveAttribute('href', '/#projects')
   })
 
+  it('should mark Writing as the current page on writing pages, and nothing on other pages', () => {
+    // Writing pages pass no activePath, so Writing stays current there (existing behavior).
+    const { unmount } = render(<Navbar isDark={false} onToggleDark={vi.fn()} homePath="/" />)
+    expect(screen.getByRole('link', { name: 'Writing' })).toHaveAttribute('aria-current', 'page')
+    unmount()
+
+    // A page that is not Writing says which path it is, so no nav link claims it.
+    render(<Navbar isDark={false} onToggleDark={vi.fn()} homePath="/" activePath="/projects" />)
+    expect(screen.getByRole('link', { name: 'Writing' })).not.toHaveAttribute('aria-current')
+  })
+
   it('should place Writing before Contact in the nav', () => {
     render(<Navbar isDark={false} onToggleDark={vi.fn()} />)
     const labels = screen.getAllByRole('link').map((a) => a.textContent)

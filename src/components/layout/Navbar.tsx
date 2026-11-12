@@ -26,20 +26,25 @@ interface NavbarProps {
   onToggleDark: () => void
   /** Set on pages other than the home page so section links point back to "/#section". */
   homePath?: string
+  /** The page path being shown, when it is not one of the nav pages (e.g. "/projects"). Left unset, off-home pages count as Writing. */
+  activePath?: string
 }
 
 interface NavLinkProps {
   href: string
   label: string
   homePath: string
+  activePath?: string
   activeId: string | null
   className?: string
   onClick?: () => void
 }
 
-function NavLink({ href, label, homePath, activeId, className = '', onClick }: NavLinkProps) {
+function NavLink({ href, label, homePath, activePath, activeId, className = '', onClick }: NavLinkProps) {
   const isPage = !href.startsWith('#')
-  const isActive = isPage ? !!homePath : !homePath && href.slice(1) === activeId
+  const isActive = isPage
+    ? activePath === undefined ? !!homePath : activePath === href
+    : !homePath && href.slice(1) === activeId
   return (
     <a
       href={isPage ? href : `${homePath}${href}`}
@@ -58,7 +63,7 @@ function NavLink({ href, label, homePath, activeId, className = '', onClick }: N
   )
 }
 
-export default function Navbar({ isDark, onToggleDark, homePath = '' }: NavbarProps) {
+export default function Navbar({ isDark, onToggleDark, homePath = '', activePath }: NavbarProps) {
   const activeId = useActiveSection(SECTION_IDS)
   const [menuOpen, setMenuOpen] = useState(false)
   const menuButtonRef = useRef<HTMLButtonElement>(null)
@@ -104,7 +109,7 @@ export default function Navbar({ isDark, onToggleDark, homePath = '' }: NavbarPr
           <ul className="hidden sm:flex sm:gap-5 md:gap-8" role="list">
             {NAV_LINKS.map(({ href, label }) => (
               <li key={href}>
-                <NavLink href={href} label={label} homePath={homePath} activeId={activeId} className="whitespace-nowrap" />
+                <NavLink href={href} label={label} homePath={homePath} activePath={activePath} activeId={activeId} className="whitespace-nowrap" />
               </li>
             ))}
           </ul>
@@ -147,6 +152,7 @@ export default function Navbar({ isDark, onToggleDark, homePath = '' }: NavbarPr
                 href={href}
                 label={label}
                 homePath={homePath}
+                activePath={activePath}
                 activeId={activeId}
                 className="block py-3"
                 onClick={() => closeMenu(true)}

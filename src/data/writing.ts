@@ -3,6 +3,95 @@ import type { WritingPost } from '../types'
 // Case study copy. Keep to facts that are true; do not add numbers or details that were not supplied.
 const writing: WritingPost[] = [
   {
+    slug: 'what-held-up-spec-first-ai-agents',
+    date: '2026-11-12',
+    title: 'What held up when AI agents built this under a spec-first process',
+    summary: 'A job-search tracker built by AI agents under rules I wrote, and what held up and what did not.',
+    intro: [
+      'I built a job-search tracker. AI agents wrote most of the code. I wrote the rules.',
+      'RoleRadar is a local-first tracker with an MCP server, a web UI and a MongoDB store. Every write is audited. Nothing is ever hard-deleted. It has 16 specs and 53 ADRs. It took 99 pull requests. The .NET suites pass 2,253 tests. The web suite passes 1,368, plus 154 browser tests.',
+      'Here is what held up, and what did not.',
+    ],
+    sections: [
+      {
+        heading: 'What held up',
+        paragraphs: [],
+        subsections: [
+          {
+            heading: 'A spec before code',
+            paragraphs: [
+              'Every feature starts as a spec with measurable success criteria. The agent cannot start without one.',
+            ],
+          },
+          {
+            heading: 'Tests first, shown failing',
+            paragraphs: [
+              'The agent writes the failing test and shows the red run. Then it writes the code. It reports command output, not impressions.',
+            ],
+          },
+          {
+            heading: 'Gates a machine checks',
+            paragraphs: [
+              'Architecture tests enforce the layers. A review gate rebuilds and retests a clean clone. Secrets and real names are scanned on every commit.',
+            ],
+          },
+          {
+            heading: 'One pull request per gate',
+            paragraphs: ['Small enough to read.'],
+          },
+        ],
+      },
+      {
+        heading: 'What did not hold up',
+        paragraphs: [],
+        subsections: [
+          {
+            heading: 'Agent reports',
+            paragraphs: [
+              "They are fast, confident and sometimes wrong. More than once an agent's summary disagreed with its own ADR. I trusted the ADR and the command output.",
+            ],
+          },
+          {
+            heading: 'A "census" that guessed',
+            paragraphs: [
+              'A table of evidence said a rule "can embed" a secret. Nobody had seen it happen. I sent it back twice.',
+            ],
+          },
+          {
+            heading: 'A privacy gate that failed open',
+            paragraphs: [
+              'If a field it relied on went missing, it scrubbed nothing. It now fails closed, with a test.',
+            ],
+          },
+          {
+            heading: 'Tests that proved the wrong thing',
+            paragraphs: [
+              'The privacy tests all passed. Then I ran the stack and opened the dashboard. A PKCE code verifier was sitting in an exported log record. The tests had only covered failed sign-ins. No one had checked a successful one.',
+            ],
+          },
+          {
+            heading: 'A restart bug',
+            paragraphs: [
+              'The local dev loop worked once. The second start failed. A generated database password no longer matched the saved volume. Only a person using it twice found it.',
+            ],
+          },
+        ],
+      },
+      {
+        heading: 'The lesson',
+        paragraphs: [
+          'Gates prove what they assert and nothing else. Someone has to run the thing.',
+          'There are things I never hand over. Committing and pushing. Anything near real data. Trust decisions on my machine. Upstream pull requests. The calls themselves. When we kept our own log scrubber instead of a library, I decided. An ADR records why.',
+          'AI made me faster. It did not make me less responsible. It moved my work from typing to deciding and checking.',
+        ],
+      },
+    ],
+    links: [
+      { label: 'RoleRadar project page', href: '/projects/roleradar' },
+      { label: 'RoleRadar repository', href: 'https://github.com/mwalczyk81/roleradar' },
+    ],
+  },
+  {
     slug: 'shared-library-memory-leak',
     date: '2026-11-05',
     title: 'Finding a memory leak in a shared library',
