@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/layout/Navbar'
 import Bio from './components/sections/Bio'
 import Skills from './components/sections/Skills'
@@ -31,6 +32,7 @@ export default function App() {
       <>
         <Navbar isDark={isDark} onToggleDark={toggle} homePath="/" />
         <main>{path === '/writing' ? <WritingIndex /> : <WritingPostPage slug={slug} />}</main>
+        <Analytics />
       </>
     )
   }
@@ -43,6 +45,7 @@ export default function App() {
         <main>
           <ProjectDetailPage id={id} />
         </main>
+        <Analytics />
       </>
     )
   }
@@ -56,6 +59,7 @@ export default function App() {
         <Projects />
         <Contact />
       </main>
+      <Analytics />
     </>
   )
 }
